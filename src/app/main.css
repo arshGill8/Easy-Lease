@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: roboto;
+}
+
+h1 {
+  font-size: 1.75rem;
+}
+label {
+  font-size: 1.05rem;
+}
+
+input {
+  font-size: 1.05rem;
+}
