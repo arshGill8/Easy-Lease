@@ -16,7 +16,7 @@ export default function ThankYou() {
 
   const downloadPDF = () => {
     axios({
-      url: "https://simple-lease-api.onrender.com/createForm",
+      url: "https://easy-lease-tau.vercel.app/api/createForm", // Updated URL
       method: "POST",
       responseType: "blob", // Important
       data: {

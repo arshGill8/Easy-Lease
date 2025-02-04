@@ -378,11 +378,7 @@ export default async function handler(req, res) {
               height,
             });
           } catch (err) {
-            console.log(
-              err,
-              "Error processing landlord sign at index",
-              index
-            );
+            console.log(err, "Error processing landlord sign at index", index);
           }
         })
       );
@@ -421,9 +417,7 @@ export default async function handler(req, res) {
         tenantSignature.map(async (tenant, index) => {
           try {
             if (!tenant.tenantSign) {
-              console.log(
-                `Warning: Missing tenantSign data at index ${index}`
-              );
+              console.log(`Warning: Missing tenantSign data at index ${index}`);
               return;
             }
             const image = await pdfDoc.embedPng(tenant.tenantSign);
@@ -460,10 +454,7 @@ export default async function handler(req, res) {
         })
       );
     } catch (error) {
-      console.log(
-        "An error occurred while processing tenantSignature:",
-        error
-      );
+      console.log("An error occurred while processing tenantSignature:", error);
     }
 
     // 🔹 Save the modified PDF to memory (Not writing to disk)
