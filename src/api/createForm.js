@@ -1,8 +1,9 @@
 import { PDFDocument } from "pdf-lib";
-import { readFile } from "fs/promises";
-import path from "path";
 
 const defaultValue = 0; // ✅ Numeric fallback
+
+const drivePdfUrl =
+  "https://drive.google.com/uc?export=download&id=1W-oU6pLx8ssgVnGkoyrvSjSDLbaTlehB";
 
 // 🔹 API Route (Runs on Vercel)
 export default async function handler(req, res) {
@@ -23,9 +24,12 @@ export default async function handler(req, res) {
       tenantSignature,
     } = req.body;
 
-    // 🔹 Load the PDF template (Vercel does NOT allow file system access)
-    const pdfPath = path.join(process.cwd(), "public", "lease_doc.pdf");
-    const existingPdfBytes = await readFile(pdfPath);
+    // 🔹 Fetch the PDF from Google Drive
+
+    const response = await fetch(drivePdfUrl);
+    if (!response.ok) throw new Error("Failed to fetch PDF from Google Drive");
+
+    const existingPdfBytes = await response.arrayBuffer();
 
     // 🔹 Load PDF
     const pdfDoc = await PDFDocument.load(existingPdfBytes);
