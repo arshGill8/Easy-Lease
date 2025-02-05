@@ -2,6 +2,8 @@ import { PDFDocument } from "pdf-lib";
 import { readFile } from "fs/promises";
 import path from "path";
 
+const defaultValue = 0; // ✅ Numeric fallback
+
 // 🔹 API Route (Runs on Vercel)
 export default async function handler(req, res) {
   if (req.method !== "POST") {
