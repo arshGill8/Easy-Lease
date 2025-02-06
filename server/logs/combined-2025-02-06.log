@@ -1,0 +1,3 @@
+{"level":"info","message":"🚀 Server running at http://127.0.0.1:3001","timestamp":"2025-02-06T16:05:16.100Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"Incoming request","method":"GET","timestamp":"2025-02-06T16:05:23.143Z","url":"/"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"Incoming request","method":"GET","timestamp":"2025-02-06T16:05:23.466Z","url":"/favicon.ico"}

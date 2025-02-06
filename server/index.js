@@ -9,7 +9,9 @@ import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 import winston from "winston";
 import DailyRotateFile from "winston-daily-rotate-file";
+import dotenv from "dotenv";
 
+dotenv.config();
 // ✅ Initialize Express app
 const app = express();
 const port = process.env.PORT || 3001;
@@ -176,8 +178,13 @@ app.post("/createForm", limiter, validateFormData, async (req, res) => {
       setFormField(form, field, formattedLandlordName[i] || "")
     );
 
-    ["txtbuyer1FName", "txtbuyer2FName", "txtbuyer3FName", "txtbuyer4FName"].forEach(
-      (field, i) => setFormField(form, field, formattedTenantName[i] || "")
+    [
+      "txtbuyer1FName",
+      "txtbuyer2FName",
+      "txtbuyer3FName",
+      "txtbuyer4FName",
+    ].forEach((field, i) =>
+      setFormField(form, field, formattedTenantName[i] || "")
     );
 
     // 🔹 Fill Rental Property Info
