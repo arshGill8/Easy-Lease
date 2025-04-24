@@ -16,7 +16,8 @@ export default function ThankYou() {
 
   const downloadPDF = () => {
     axios({
-      url: "https://easy-lease-api.onrender.com/createForm", // Updated URL
+      // url: "https://easy-lease-api.onrender.com/createForm", // Updated URL
+      url: "http://localhost:3001/createForm",
       method: "POST",
       responseType: "blob", // Important
       data: {
@@ -32,7 +33,6 @@ export default function ThankYou() {
       },
     })
       .then((response) => {
-        console.log(response);
         const url = window.URL.createObjectURL(new Blob([response.data]));
         const link = document.createElement("a");
         link.href = url;
@@ -47,7 +47,7 @@ export default function ThankYou() {
   };
 
   return (
-    <div className="text-center py-4 ">
+    <div className="text-center py-4 flex flex-col items-center ">
       <div className="mb-4">
         <h2 className="lg:text-xl tracking-wide">
           Thank You <br /> Your lease was completed successfully!
@@ -56,7 +56,10 @@ export default function ThankYou() {
       <button
         onClick={downloadPDF}
         type="button"
-        className="flex gap-3  text-white bg-green-500		 hover:bg-green-600 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center dark:focus:ring-[#F7BE38]/50 me-2 mb-2"
+        className="flex gap-3 text-white bg-green-500 hover:bg-green-600 
+        focus:ring-4 focus:outline-none font-medium rounded-lg text-sm
+         px-5 py-2.5 text-center items-center
+          dark:focus:ring-[#F7BE38]/50 mb-2"
       >
         <DownloadIcon />
         Download Completed File

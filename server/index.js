@@ -121,8 +121,13 @@ function setCheckBox(form, fieldName, condition) {
 async function embedSignature(pdfDoc, page, imageData, x, y) {
   if (!imageData) return;
   try {
-    const image = await pdfDoc.embedPng(imageData);
+    const base64 = imageData.replace(/^data:image\/png;base64,/, "");
+    const image = await pdfDoc.embedPng(base64);
     const { width, height } = image.scale(0.17);
+    logger.info(
+      `📍 Drawing signature at x: ${x}, y: ${y}, width: ${width}, height: ${height}`
+    );
+
     page.drawImage(image, { x, y, width, height });
   } catch (error) {
     logger.error("❌ Error embedding signature:", error);
@@ -142,19 +147,24 @@ app.post("/createForm", limiter, validateFormData, async (req, res) => {
     const formattedLandlordName = req.body.landlordName.map(
       (item) => item.landlordName
     );
+
     const formattedTenantName = req.body.tenantName.map(
       (item) => item.tenantName
     );
-    const formattedLandlordSignature = req.body.landlordSignature.map(
-      (item) => ({
-        landlordName: item.landlordName,
-        landlordSign: item.landlordSign,
+
+    const LandlordSignature = req.body.landlordSignature.map(
+      ({ landlordName, landlordSign }) => ({
+        landlordName,
+        landlordSign,
       })
     );
-    const formattedTenantSignature = req.body.tenantSignature.map((item) => ({
-      tenantName: item.tenantName,
-      tenantSign: item.tenantSign,
-    }));
+
+    const TenantSignature = req.body.tenantSignature.map(
+      ({ tenantName, tenantSign }) => ({
+        tenantName,
+        tenantSign,
+      })
+    );
 
     // ✅ Load the PDF template with error handling
     let pdfDoc;
@@ -201,18 +211,21 @@ app.post("/createForm", limiter, validateFormData, async (req, res) => {
         .send("Error: PDF template is missing required pages.");
     }
     const signPage = pages[6];
+    const pageHeight = signPage.getHeight();
 
     await Promise.all(
-      formattedLandlordSignature.map((sign, i) =>
-        embedSignature(pdfDoc, signPage, sign.landlordSign, 300, 555 - i * 50)
+      LandlordSignature.map((sign, i) =>
+        embedSignature(pdfDoc, signPage, sign.landlordSign, 300, 523 - i * 40)
       )
     );
 
     await Promise.all(
-      formattedTenantSignature.map((sign, i) =>
-        embedSignature(pdfDoc, signPage, sign.tenantSign, 300, 355 - i * 50)
+      TenantSignature.map((sign, i) =>
+        embedSignature(pdfDoc, signPage, sign.tenantSign, 300, 318 - i * 40)
       )
     );
+
+    form.flatten();
 
     // 🔹 Send the PDF Directly
     const pdfBytes = await pdfDoc.save();
