@@ -251,3 +251,19 @@
 {"level":"info","message":"✅ PDF successfully generated and sent!","timestamp":"2025-04-24T22:21:18.945Z"}
 {"level":"info","message":"🚀 Server running at http://127.0.0.1:3001","timestamp":"2025-04-24T22:36:42.330Z"}
 {"level":"info","message":"🚀 Server running at http://127.0.0.1:3001","timestamp":"2025-04-24T22:37:05.239Z"}
+{"level":"info","message":"🚀 Server running at http://127.0.0.1:3001","timestamp":"2025-04-25T00:35:15.449Z"}
+{"ip":"::1","level":"info","message":"Incoming request","method":"POST","timestamp":"2025-04-25T00:36:32.310Z","url":"/createForm"}
+{"level":"warn","message":"⚠️ Could not set name/date for landlord 1: PDFDocument has no form field with the name \"landlordDateField1\"","stack":"Error: PDFDocument has no form field with the name \"landlordDateField1\"\n    at new NoSuchFieldError (/Users/arshgill/Documents/Code/Easy-Lease/server/node_modules/pdf-lib/cjs/api/errors.js:59:24)\n    at PDFForm.getField (/Users/arshgill/Documents/Code/Easy-Lease/server/node_modules/pdf-lib/cjs/api/form/PDFForm.js:133:15)\n    at PDFForm.getTextField (/Users/arshgill/Documents/Code/Easy-Lease/server/node_modules/pdf-lib/cjs/api/form/PDFForm.js:270:26)\n    at file:///Users/arshgill/Documents/Code/Easy-Lease/server/index.js:230:14\n    at async Promise.all (index 0)\n    at async file:///Users/arshgill/Documents/Code/Easy-Lease/server/index.js:214:5","timestamp":"2025-04-25T00:36:32.434Z"}
+{"level":"info","message":"✅ PDF successfully generated and sent!","timestamp":"2025-04-25T00:36:32.579Z"}
+{"level":"info","message":"🚀 Server running at http://127.0.0.1:3001","timestamp":"2025-04-25T00:40:14.424Z"}
+{"ip":"::1","level":"info","message":"Incoming request","method":"POST","timestamp":"2025-04-25T00:40:30.613Z","url":"/createForm"}
+{"level":"info","message":"✅ PDF successfully generated and sent!","timestamp":"2025-04-25T00:40:30.875Z"}
+{"level":"info","message":"🚀 Server running at http://127.0.0.1:3001","timestamp":"2025-04-25T00:43:13.051Z"}
+{"level":"info","message":"🚀 Server running at http://127.0.0.1:3001","timestamp":"2025-04-25T01:02:16.816Z"}
+{"level":"info","message":"🚀 Server running at http://127.0.0.1:3001","timestamp":"2025-04-25T01:02:24.886Z"}
+{"level":"info","message":"🚀 Server running at http://127.0.0.1:3001","timestamp":"2025-04-25T01:06:03.060Z"}
+{"level":"info","message":"🚀 Server running at http://127.0.0.1:3001","timestamp":"2025-04-25T01:08:24.697Z"}
+{"ip":"::1","level":"info","message":"Incoming request","method":"POST","timestamp":"2025-04-25T01:14:52.177Z","url":"/createForm"}
+{"level":"info","message":"✅ PDF successfully generated and sent!","timestamp":"2025-04-25T01:14:52.506Z"}
+{"ip":"::1","level":"info","message":"Incoming request","method":"POST","timestamp":"2025-04-25T01:16:03.439Z","url":"/createForm"}
+{"level":"info","message":"✅ PDF successfully generated and sent!","timestamp":"2025-04-25T01:16:03.627Z"}

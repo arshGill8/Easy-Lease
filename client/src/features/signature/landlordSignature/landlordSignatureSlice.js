@@ -9,7 +9,6 @@ export const landlordSignatureSlice = createSlice({
   initialState,
   reducers: {
     updateLandlordSignature(state, action) {
-      console.log(state);
       const { index, data } = action.payload;
       state[index] = {
         ...state[index],

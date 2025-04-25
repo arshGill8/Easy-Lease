@@ -22,7 +22,6 @@ export default function LandlordSignature() {
     dispatch(removeLandlordSignature(index));
   };
   const handleUpdateLandlordSignature = (index, e) => {
-    console.log(e);
     const newData = { [e.target.name]: e.target.value };
     dispatch(updateLandlordSignature({ index, data: newData }));
   };

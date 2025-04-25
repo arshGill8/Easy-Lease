@@ -124,9 +124,6 @@ async function embedSignature(pdfDoc, page, imageData, x, y) {
     const base64 = imageData.replace(/^data:image\/png;base64,/, "");
     const image = await pdfDoc.embedPng(base64);
     const { width, height } = image.scale(0.17);
-    logger.info(
-      `📍 Drawing signature at x: ${x}, y: ${y}, width: ${width}, height: ${height}`
-    );
 
     page.drawImage(image, { x, y, width, height });
   } catch (error) {
@@ -153,16 +150,18 @@ app.post("/createForm", limiter, validateFormData, async (req, res) => {
     );
 
     const LandlordSignature = req.body.landlordSignature.map(
-      ({ landlordName, landlordSign }) => ({
+      ({ landlordName, landlordSign, landlordSignDate }) => ({
         landlordName,
         landlordSign,
+        landlordSignDate,
       })
     );
 
     const TenantSignature = req.body.tenantSignature.map(
-      ({ tenantName, tenantSign }) => ({
+      ({ tenantName, tenantSign, tenantSignDate }) => ({
         tenantName,
         tenantSign,
+        tenantSignDate,
       })
     );
 
@@ -211,18 +210,54 @@ app.post("/createForm", limiter, validateFormData, async (req, res) => {
         .send("Error: PDF template is missing required pages.");
     }
     const signPage = pages[6];
-    const pageHeight = signPage.getHeight();
 
     await Promise.all(
-      LandlordSignature.map((sign, i) =>
-        embedSignature(pdfDoc, signPage, sign.landlordSign, 300, 523 - i * 40)
-      )
+      LandlordSignature.map(async (sign, i) => {
+        //Embed the signature
+        await embedSignature(
+          pdfDoc,
+          signPage,
+          sign.landlordSign,
+          300,
+          523 - i * 40
+        );
+        // Set the name and date fields
+        try {
+          form
+            .getTextField(`txtsellersig${i + 1}`)
+            .setText(sign.landlordName || "");
+          form.getTextField(`sig${i + 1}_date`).setText(sign.landlordSignDate);
+        } catch (error) {
+          logger.warn(
+            `⚠️ Could not set name/date for landlord ${i + 1}:`,
+            error
+          );
+        }
+      })
     );
 
     await Promise.all(
-      TenantSignature.map((sign, i) =>
-        embedSignature(pdfDoc, signPage, sign.tenantSign, 300, 318 - i * 40)
-      )
+      TenantSignature.map(async (sign, i) => {
+        await embedSignature(
+          pdfDoc,
+          signPage,
+          sign.tenantSign,
+          300,
+          318 - i * 40
+        );
+
+        try {
+          form
+            .getTextField(`txtbuyersig${i + 1}`)
+            .setText(sign.tenantName || "");
+          form.getTextField(`tsig${i + 1}_date`).setText(sign.tenantSignDate);
+        } catch (error) {
+          logger.warn(
+            `⚠️ Could not set name/date for landlord ${i + 1}:`,
+            error
+          );
+        }
+      })
     );
 
     form.flatten();
