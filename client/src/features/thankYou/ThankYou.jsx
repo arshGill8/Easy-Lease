@@ -16,8 +16,8 @@ export default function ThankYou() {
 
   const downloadPDF = () => {
     axios({
-      // url: "https://easy-lease-api.onrender.com/createForm", // Updated URL
-      url: "http://localhost:3001/createForm",
+      url: "https://easy-lease-api.onrender.com/createForm", // Updated URL
+      // url: "http://localhost:3001/createForm",
       method: "POST",
       responseType: "blob", // Important
       data: {
