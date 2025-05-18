@@ -24,11 +24,11 @@ const initialState = {
   // otherUtil3: "",
 };
 
-export const leaseTermInfoSlice = createSlice({
-  name: "leaseTermInfo",
+export const termTenancySlice = createSlice({
+  name: "termTenancy",
   initialState,
   reducers: {
-    updateLeaseTermInfo: (state, action) => {
+    updateTermTenancy: (state, action) => {
       const { name, value } = action.payload;
       state[name] = value;
     },
@@ -36,6 +36,6 @@ export const leaseTermInfoSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { updateLeaseTermInfo } = leaseTermInfoSlice.actions;
+export const { updateTermTenancy } = termTenancySlice.actions;
 
-export default leaseTermInfoSlice.reducer;
+export default termTenancySlice.reducer;

@@ -1,15 +1,12 @@
-// Reusable radio input component
-export default function RadioInput({ label, value, checked, onChange }) {
+export default function RadioButton({ name, value, checked, onChange }) {
   return (
-    <div className="radio-input">
-      <label className="radio-label">{label}</label>
-      <input
-        type="radio"
-        value={value}
-        checked={checked}
-        onChange={onChange}
-        className="radio-button"
-      />
-    </div>
+    <input
+      name={name}
+      type="radio"
+      value={value}
+      onChange={onChange}
+      checked={checked}
+      className="w-4 bg-transparent"
+    />
   );
 }

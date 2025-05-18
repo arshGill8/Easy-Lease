@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  value: 1,
+  value: 4,
 };
 
 export const currentPageSlice = createSlice({
@@ -17,7 +17,6 @@ export const currentPageSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
 export const { pageIncrement, pageDecrement } = currentPageSlice.actions;
 
 export default currentPageSlice.reducer;

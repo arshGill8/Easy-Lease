@@ -5,15 +5,16 @@ export default function InputField({
   type,
   value,
   onChange,
+  className = "bg-transparent font-header w-full text-base mb-4 mt-4 placeholder-gray-500 border-b-2 border-black py-2 focus:border-[#43A047] focus:outline-none",
 }) {
   return (
     <input
       placeholder={placeholder}
       name={name}
-      type={type}
+      type="text"
       onChange={onChange}
       value={value}
-      className="w-full mb-4 inline border border-gray-300 text-gray-900 text-md rounded-lg p-3 focus:shadow-md"
+      className={className}
     />
   );
 }

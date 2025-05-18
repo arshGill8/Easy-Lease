@@ -1,5 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { updateDepositInfo } from "./depositInfoSlice";
+import RadioButton from "../../common/RadioButton";
+import InputField from "../../common/InputField";
 
 export default function DepositInfo() {
   const dispatch = useDispatch();
@@ -19,25 +21,21 @@ export default function DepositInfo() {
             <div className="flex flex-col gap-2 ">
               <label>Yes</label>
               {/* <label>The lawful rent will be discounted as follows: </label> */}
-              <input
+              <RadioButton
                 name="rentDiscount"
-                type="radio"
                 value="yes"
                 checked={depositInfo.rentDiscount === "yes"}
                 onChange={(e) => handleUpdateDepositInfo(e)}
-                className="w-full inline border border-gray-300 text-gray-900 text-md rounded-lg p-3 focus:shadow-md"
               />
             </div>
 
             <div className="flex flex-col gap-2">
               <label>No</label>
-              <input
+              <RadioButton
                 name="rentDiscount"
-                type="radio"
                 value="no"
                 checked={depositInfo.rentDiscount === "no"}
                 onChange={(e) => handleUpdateDepositInfo(e)}
-                className="w-full inline border border-gray-300 text-gray-900 text-md rounded-lg p-3 focus:shadow-md"
               />
             </div>
           </div>
@@ -47,38 +45,32 @@ export default function DepositInfo() {
             <label className="block ">
               Provide description of rent discount:
             </label>
-            <input
-              type="text"
+            <InputField
               value={depositInfo.rentDiscountDesc}
-              onChange={(e) => handleUpdateDepositInfo(e)}
               name="rentDiscountDesc"
-              className="w-full mt-2 block border border-gray-300 text-gray-900 text-md rounded-lg p-2 focus:shadow-md"
+              onChange={(e) => handleUpdateDepositInfo(e)}
             />
           </div>
         )}
-        <div className="flex justify-between mb-6">
+        <div className="flex justify-between mt-6 mb-6">
           <h2 className="text-lg  "> Rent Deposit?</h2>
           <div className="flex  gap-8 ">
             <div className="flex flex-col gap-2">
               <label>Yes</label>
-              <input
+              <RadioButton
                 name="rentDeposit"
-                type="radio"
                 value="yes"
                 checked={depositInfo.rentDeposit === "yes"}
                 onChange={(e) => handleUpdateDepositInfo(e)}
-                className="w-full inline border border-gray-300 text-gray-900 text-md rounded-lg p-3 focus:shadow-md"
               />
             </div>
             <div className="flex flex-col gap-2">
               <label>No</label>
-              <input
+              <RadioButton
                 name="rentDeposit"
-                type="radio"
                 value="no"
                 checked={depositInfo.rentDeposit === "no"}
                 onChange={(e) => handleUpdateDepositInfo(e)}
-                className="w-full inline border border-gray-300 text-gray-900 text-md rounded-lg p-3 focus:shadow-md"
               />
             </div>
           </div>
@@ -86,13 +78,10 @@ export default function DepositInfo() {
         {depositInfo.rentDeposit === "yes" && (
           <>
             <h2 className=" flex justify-center mt-5">Rent deposit amount</h2>
-            <input
-              value={depositAmount}
+            <InputField
+              value={depositInfo.depositAmount}
               onChange={(e) => handleUpdateDepositInfo(e)}
-              type="text"
               name="depositAmount"
-              className="w-full mt-2 inline border border-gray-300 text-gray-900 text-md rounded-lg p-2 focus:shadow-md"
-              placeholder="$1000"
             />
             <p className="mt-1 text-sm text-center">
               {" "}
@@ -107,24 +96,20 @@ export default function DepositInfo() {
             <div className="flex flex-col gap-2">
               <label>Yes</label>
 
-              <input
+              <RadioButton
                 name="keyDeposit"
-                type="radio"
                 value="yes"
                 checked={depositInfo.keyDeposit === "yes"}
                 onChange={(e) => handleUpdateDepositInfo(e)}
-                className="w-full inline border border-gray-300 text-gray-900 text-md rounded-lg p-3 focus:shadow-md"
               />
             </div>
             <div className="flex flex-col gap-2">
               <label>No</label>
-              <input
+              <RadioButton
                 name="keyDeposit"
-                type="radio"
                 value="no"
                 checked={depositInfo.keyDeposit === "no"}
                 onChange={(e) => handleUpdateDepositInfo(e)}
-                className="w-full inline border border-gray-300 text-gray-900 text-md rounded-lg p-3 focus:shadow-md"
               />
             </div>
           </div>
@@ -135,24 +120,19 @@ export default function DepositInfo() {
             <h2 className=" flex justify-center mt-5">
               Refundable key deposit amount
             </h2>
-            <input
-              value={keyDepAmount}
+            <InputField
+              value={DepositInfo.keyDepAmount}
               onChange={(e) => handleUpdateDepositInfo(e)}
-              type="text"
               name="keyDepAmount"
-              className="w-full mt-2 inline border border-gray-300 text-gray-900 text-md rounded-lg p-2 focus:shadow-md"
-              placeholder="$75"
             />
             <h2 className=" flex justify-center mt-4">Provide description</h2>
-            <input
-              value={keyDepositDesc}
-              type="text"
+            <InputField
+              value={DepositInfo.keyDepositDesc}
               onChange={(e) => handleUpdateDepositInfo(e)}
-              className="w-full mt-2 inline border border-gray-300 text-gray-900 text-md rounded-lg p-2 focus:shadow-md"
               placeholder="ex. number of keys, access cards and remote
               entry devices"
               name="keyDepositDesc"
-            ></input>
+            />
           </>
         )}
         <div className="flex justify-between mb-6">
@@ -160,24 +140,20 @@ export default function DepositInfo() {
           <div className="flex   gap-8 ">
             <div className="flex flex-col gap-2">
               <label>Yes</label>
-              <input
+              <RadioButton
                 name="smoking"
-                type="radio"
                 value="yes"
                 checked={depositInfo.smoking === "yes"}
                 onChange={(e) => handleUpdateDepositInfo(e)}
-                className="w-full inline border border-gray-300 text-gray-900 text-md rounded-lg p-3 focus:shadow-md"
               />
             </div>
             <div className="flex flex-col gap-2">
               <label>No</label>
-              <input
+              <RadioButton
                 name="smoking"
-                type="radio"
                 value="no"
                 checked={depositInfo.smoking === "no"}
                 onChange={(e) => handleUpdateDepositInfo(e)}
-                className="w-full inline border border-gray-300 text-gray-900 text-md rounded-lg p-3 focus:shadow-md"
               />
             </div>
           </div>
@@ -187,12 +163,11 @@ export default function DepositInfo() {
               <h2 className=" flex justify-center mt-5">
                 Provide description of smoking rules{" "}
               </h2>
-              <input
+              <TextField
                 name="smokingRules"
                 value={depositInfo.smokingRules}
                 onChange={(e) => handleUpdateDepositInfo(e)}
-                className="w-full mt-2 inline border border-gray-300 text-gray-900 text-md rounded-lg p-2 focus:shadow-md"
-              ></input>
+              />
             </div>
           )}
         </div>
@@ -201,24 +176,20 @@ export default function DepositInfo() {
           <div className="flex  gap-8">
             <div className="flex flex-col gap-2">
               <label>Yes </label>
-              <input
+              <RadioButton
                 name="tenantInsurance"
-                type="radio"
                 value="yes"
                 checked={depositInfo.tenantInsurance === "yes"}
                 onChange={(e) => handleUpdateDepositInfo(e)}
-                className="w-full inline border border-gray-300 text-gray-900 text-md rounded-lg p-3 focus:shadow-md"
               />
             </div>
             <div className="flex flex-col gap-2">
               <label>No</label>
-              <input
+              <RadioButton
                 name="tenantInsurance"
-                type="radio"
                 value="no"
                 checked={depositInfo.tenantInsurance === "no"}
                 onChange={(e) => handleUpdateDepositInfo(e)}
-                className="w-full inline border border-gray-300 text-gray-900 text-md rounded-lg p-3 focus:shadow-md"
               />
             </div>
           </div>{" "}
@@ -228,25 +199,21 @@ export default function DepositInfo() {
           <div className="flex  gap-8 ">
             <div className="flex flex-col gap-2">
               <label>Yes</label>
-              <input
+              <RadioButton
                 name="addTerm"
-                type="radio"
                 value="yes"
                 checked={depositInfo.addTerm === "yes"}
                 onChange={(e) => handleUpdateDepositInfo(e)}
-                className="w-full inline border border-gray-300 text-gray-900 text-md rounded-lg p-3 focus:shadow-md"
               />
             </div>
 
             <div className="flex flex-col gap-2">
               <label>No</label>
-              <input
+              <RadioButton
                 name="addTerm"
-                type="radio"
                 value="no"
                 checked={depositInfo.addTerm === "no"}
                 onChange={(e) => handleUpdateDepositInfo(e)}
-                className="w-full inline border border-gray-300 text-gray-900 text-md rounded-lg p-3 focus:shadow-md"
               />
             </div>
           </div>

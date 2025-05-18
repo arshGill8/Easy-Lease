@@ -3,7 +3,7 @@ import { landlordNameReducer } from "../features/name/landlordName";
 import { tenantNameReducer } from "../features/name/tenantName";
 import { contactInfoReducer } from "../features/contactInfo";
 import { depositInfoReducer } from "../features/depositInfo";
-import { leaseTermInfoReducer } from "../features/leaseTermInfo";
+import { termTenancyReducer } from "../features/termTenancy";
 import { rentalUnitReducer } from "../features/rentalUnit";
 import { utilityInfoReducer } from "../features/utilityInfo";
 import { tenantSignatureReducer } from "../features/signature/tenantSignature";
@@ -19,7 +19,7 @@ const store = configureStore({
     landlordSignature: landlordSignatureReducer,
     contactInfo: contactInfoReducer,
     depositInfo: depositInfoReducer,
-    leaseTermInfo: leaseTermInfoReducer,
+    termTenancy: termTenancyReducer,
     rentalUnit: rentalUnitReducer,
     utilityInfo: utilityInfoReducer,
   },

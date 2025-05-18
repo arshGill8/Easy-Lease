@@ -3,9 +3,11 @@
 @tailwind utilities;
 
 * {
-  font-family: roboto;
+  font-family: "montserrat";
 }
-
+body {
+  @apply font-sans;
+}
 h1 {
   font-size: 1.75rem;
 }
