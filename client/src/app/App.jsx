@@ -32,21 +32,24 @@ export default function App() {
 
   return (
     <div
-      className="  bg-[#F5F7FA] justify-items-center w-full p-5 
+      className="  bg-[#F5F7FA] justify-items-center w-full p-5  md:px-20
     rounded-3xl	
     "
     >
-      <h1 className="font-header font-medium mb-8 mt-4 text-2xl md:text-3xl underline-offset-4 underline">
+      <h1 className="font-header font-black mb-8 mt-4 text-2xl md:text-3xl underline-offset-4 underline">
         Easy-Lease Ontario
       </h1>
+
       {renderPage}
       <div className="flex gap-8 w-full justify-between">
         {currentPage > 1 && currentPage < 8 ? <BackButton /> : ""}{" "}
         {currentPage < 8 ? <NextButton /> : ""}
       </div>
-      <h2 className="px-2.5 font-medium py-3 text-black-500 rounded-full border-black border-2 mt-12 mb-2 ">
-        {currentPage} / 7
-      </h2>
+      {currentPage < 8 && (
+        <h2 className="px-2.5 font-medium py-3 text-black-500 rounded-full border-black border-2 mt-12 mb-2 ">
+          {currentPage} / 7
+        </h2>
+      )}
     </div>
   );
 }

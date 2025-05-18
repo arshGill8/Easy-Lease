@@ -1,13 +1,14 @@
 import { AiOutlinePlusCircle, AiOutlineCloseCircle } from "react-icons/ai";
 import React, { useRef, useEffect, useMemo } from "react";
 import SignatureCanvas from "react-signature-canvas";
-
+import FormHeader from "../../../common/FormHeader";
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateTenantSignature,
   addTenantSignature,
   removeTenantSignature,
 } from "./tenantSignatureSlice";
+import InputField from "../../../common/InputField";
 
 export default function TenantSignature() {
   const tenantSignature = useSelector((state) => state.tenantSignature);
@@ -45,73 +46,67 @@ export default function TenantSignature() {
   };
 
   return (
-    <div className="w-full mb-6">
-      <form className="my-8">
-        <div className="mb-10">
-          <h1 className="text-center flex justify-center ">
-            Tenant(s) <br />
-            Signature
-          </h1>
+    <div className="w-full ">
+      <div className="mb-10">
+        <FormHeader
+          title=" Tenant(s) 
+            Signature"
+        />
 
-          {tenantSignature.map((singleTenantSignature, index) => (
-            <div key={index} className="mb-8">
-              <input
-                placeholder="Tenant's Legal Name"
-                name="tenantName"
-                type="text"
-                className="w-full my-4 mt-8 inline border border-gray-300 text-gray-900  rounded-lg p-3 focus:shadow-md"
-                onChange={(e) => handleUpdateTenantSignature(index, e)}
-                value={singleTenantSignature.tenantName}
+        {tenantSignature.map((singleTenantSignature, index) => (
+          <div key={index} className="flex flex-col items-center ">
+            <InputField
+              placeholder={`${index + 1}. Tenant's Legal Name`}
+              name="tenantName"
+              onChange={(e) => handleUpdateTenantSignature(index, e)}
+              value={singleTenantSignature.tenantName}
+            />
+            <div className="overflow-hidden w-full  mb-8 flex flex-col items-start">
+              <SignatureCanvas
+                maxLength={80}
+                penColor="black"
+                canvasProps={{
+                  className: "w-full mb-3.5   h-24 border-b-2 border-black ",
+                }}
+                ref={(ref) => (tenantSignatureRefs.current[index] = ref)}
+                name="tenantSign"
+                onEnd={() => handleTenantEnd(index)}
               />
-              <div className="overflow-hidden border border-gray-300  rounded-lg my-4 flex flex-col items-center">
-                <label className="bg-sky-400 flex overflow-hidden py-2 w-full justify-center">
-                  Tenant signature
-                </label>
-                <SignatureCanvas
-                  maxLength={80}
-                  penColor="black"
-                  canvasProps={{
-                    className: "w-4/5 mb-3.5   h-24 border-b-2 border-black ",
-                  }}
-                  ref={(ref) => (tenantSignatureRefs.current[index] = ref)}
-                  name="tenantSign"
-                  onEnd={() => handleTenantEnd(index)}
-                />
-              </div>
-              <input
-                name="tenantSignDate"
-                type="date"
-                className="my-4 w-full mt-2 inline border border-gray-300 text-gray-900 text-md rounded-lg p-3 focus:shadow-md"
-                onChange={(e) => handleUpdateTenantSignature(index, e)}
-                value={singleTenantSignature.tenantSignDate}
-              />
+              <label className="w-full">X Tenant Signature</label>
+            </div>
+            <input
+              name="tenantSignDate"
+              type="date"
+              className="bg-transparent  md:text-xl w-4/5 mb-4  border border-black text-gray-900 rounded-sm p-2 focus:shadow-md "
+              onChange={(e) => handleUpdateTenantSignature(index, e)}
+              value={singleTenantSignature.tenantSignDate}
+            />
 
-              <div className="flex">
-                {tenantSignature.length > 1 && (
+            <div className="flex my-8  gap-20 mb-16">
+              {tenantSignature.length > 1 && (
+                <button
+                  className="w-full flex gap-1 items-center justify-center  font-medium	 text-white bg-red-500   p-2 py-3 rounded hover:bg-red-600 shadow-md"
+                  type="button"
+                  onClick={() => handleRemoveTenantSignature(index)}
+                >
+                  Remove <AiOutlineCloseCircle />
+                </button>
+              )}
+
+              {tenantSignature.length - 1 == index &&
+                tenantSignature.length < 5 && (
                   <button
-                    className="md:w-1/6 flex gap-1 items-center justify-center w-2/5 font-medium	 text-white bg-red-500   p-2 py-3 rounded hover:bg-red-600 shadow-md"
+                    className=" w-full ml-auto flex gap-1 items-center justify-center font-medium	 text-white bg-green-500  p-2 py-3 rounded hover:bg-green-600 shadow-md"
                     type="button"
-                    onClick={() => handleRemoveTenantSignature(index)}
+                    onClick={handleAddTenantSignature}
                   >
-                    Remove <AiOutlineCloseCircle />
+                    Tenant <AiOutlinePlusCircle />
                   </button>
                 )}
-
-                {tenantSignature.length - 1 == index &&
-                  tenantSignature.length < 5 && (
-                    <button
-                      className=" md:w-1/6 ml-auto flex gap-1 items-center justify-center w-2/5  font-medium	 text-white bg-green-500  p-2 py-3 rounded hover:bg-green-600 shadow-md"
-                      type="button"
-                      onClick={handleAddTenantSignature}
-                    >
-                      Tenant <AiOutlinePlusCircle />
-                    </button>
-                  )}
-              </div>
             </div>
-          ))}
-        </div>
-      </form>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
