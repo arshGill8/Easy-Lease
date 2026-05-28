@@ -31,12 +31,8 @@ export default function App() {
   const renderPage = pages[currentPage] || null;
 
   return (
-    <div
-      className="  bg-[#F5F7FA] justify-items-center w-full p-5  md:px-20
-    rounded-3xl	
-    "
-    >
-      <h1 className="font-header font-black mb-8 mt-4 text-2xl md:text-3xl underline-offset-4 underline">
+    <div className="bg-[#f5f5f5] justify-items-center w-full p-5 md:px-20rounded-3xl">
+      <h1 className="mb-8 bg-slate-800 p-3 px-4 text-white mt-4 text-2xl md:text-3xl rounded-t-md">
         Easy-Lease Ontario
       </h1>
 
