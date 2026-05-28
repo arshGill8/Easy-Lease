@@ -9,6 +9,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+server/logs/
+*.log
 
 # Editor settings (VSCode, etc.)
 .vscode/

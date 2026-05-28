@@ -28,16 +28,16 @@ export default function landlordName() {
   return (
     <div className="w-full mb-16">
       <h3
-        className="flex w-full text-lg  mb-2 justify-center mt-6 font-header
+        className="flex w-full text-lg mb-2 justify-center font-header
          "
       >
-        Landlord's Legal Name (s)
+        Landlord Name(s)
       </h3>
 
       {landlordName.map((singleLandlordName, i) => (
         <div key={i} className="mb-5">
           <InputField
-            placeholder={`${i + 1}. Landlord's Full Legal Name`}
+            placeholder={`${i + 1}. Landlord Full Name`}
             name="landlordName"
             type="text"
             onChange={(e) => handleLandlordNameChange(e, i)}
@@ -61,7 +61,7 @@ export default function landlordName() {
                 type="button"
                 onClick={handleAddLandlordName}
               >
-                Add Landlord <FaPlus />
+                Add Landlord <FaPlus className="h-3" />
               </button>
             )}
           </div>

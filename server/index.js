@@ -45,6 +45,11 @@ if (!process.env.PDF_TEMPLATE_PATH) {
   process.exit(1);
 }
 
+if (!process.env.ALLOWED_ORIGIN) {
+  logger.error("❌ Error: ALLOWED_ORIGIN environment variable is missing.");
+  process.exit(1);
+}
+
 // ✅ Rate limiter per IP
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -54,15 +59,17 @@ const limiter = rateLimit({
 });
 
 // ✅ Middleware
+// Trust the first proxy hop so req.ip reflects the real client (rate limiter relies on this).
+app.set("trust proxy", 1);
 app.use(
   cors({
-    origin: process.env.ALLOWED_ORIGIN || "*",
+    origin: process.env.ALLOWED_ORIGIN,
     methods: "GET,POST",
   })
 );
 app.use(helmet());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: "2mb" }));
+app.use(express.urlencoded({ extended: true, limit: "2mb" }));
 
 // ✅ Environment variables
 const __filename = fileURLToPath(import.meta.url);
@@ -141,15 +148,15 @@ app.post("/createForm", limiter, validateFormData, async (req, res) => {
     }
 
     // ✅ Extract Redux state into correct format
-    const formattedLandlordName = req.body.landlordName.map(
+    const formattedLandlordName = (req.body.landlordName || []).map(
       (item) => item.landlordName
     );
 
-    const formattedTenantName = req.body.tenantName.map(
+    const formattedTenantName = (req.body.tenantName || []).map(
       (item) => item.tenantName
     );
 
-    const LandlordSignature = req.body.landlordSignature.map(
+    const LandlordSignature = (req.body.landlordSignature || []).map(
       ({ landlordName, landlordSign, landlordSignDate }) => ({
         landlordName,
         landlordSign,
@@ -157,7 +164,7 @@ app.post("/createForm", limiter, validateFormData, async (req, res) => {
       })
     );
 
-    const TenantSignature = req.body.tenantSignature.map(
+    const TenantSignature = (req.body.tenantSignature || []).map(
       ({ tenantName, tenantSign, tenantSignDate }) => ({
         tenantName,
         tenantSign,
@@ -253,7 +260,7 @@ app.post("/createForm", limiter, validateFormData, async (req, res) => {
           form.getTextField(`tsig${i + 1}_date`).setText(sign.tenantSignDate);
         } catch (error) {
           logger.warn(
-            `⚠️ Could not set name/date for landlord ${i + 1}:`,
+            `⚠️ Could not set name/date for tenant ${i + 1}:`,
             error
           );
         }
