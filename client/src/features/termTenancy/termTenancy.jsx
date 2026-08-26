@@ -27,7 +27,7 @@ export default function TermTenancy() {
         <input
           name="startDate"
           type="date"
-          onChange={(e) => handleUpdateTermTenancy(e)}
+          onInput={handleUpdateTermTenancy}
           value={termTenancy.startDate}
           className="bg-transparent md:text-xl md:w-1/2 inline border border-black text-gray-900 rounded-sm p-2 focus:shadow-md "
         />
@@ -55,7 +55,7 @@ export default function TermTenancy() {
               <input
                 name="fixedTenDate"
                 type="date"
-                onChange={(e) => handleUpdateTermTenancy(e)}
+                onInput={handleUpdateTermTenancy}
                 value={termTenancy.fixedTenDate}
                 className="bg-transparent md:text-xl md:w-1/2 inline border border-black text-gray-900 rounded-sm p-2 focus:shadow-md"
               />
@@ -94,7 +94,7 @@ export default function TermTenancy() {
                 name="otherTenDetails"
                 placeholder="Weekly, Bi-Weekly"
                 value={termTenancy.otherTenDetails}
-                onChange={(e) => (e) => handleUpdateTermTenancy(e)}
+                onChange={handleUpdateTermTenancy}
               />
             </div>
           )}
@@ -115,7 +115,7 @@ export default function TermTenancy() {
             type="text"
             value={termTenancy.rentDay}
             name="rentDay"
-            onChange={(e) => (e) => handleUpdateTermTenancy(e)}
+            onChange={handleUpdateTermTenancy}
           />
         </div>
 
@@ -148,7 +148,7 @@ export default function TermTenancy() {
               value={termTenancy.otherRentDetails}
               placeholder="Weekly"
               name="otherRentDetails"
-              onChange={(e) => (e) => handleUpdateTermTenancy(e)(e)}
+              onChange={handleUpdateTermTenancy}
             />
           </div>
         )}
@@ -268,7 +268,7 @@ export default function TermTenancy() {
                     type="date"
                     value={termTenancy.partDate}
                     name="partDate"
-                    onChange={(e) => handleUpdateTermTenancy(e)}
+                    onInput={handleUpdateTermTenancy}
                     className="bg-transparent md:text-xl inline border border-black text-gray-900 rounded-sm p-2 focus:shadow-md"
                   ></input>
                 </div>
@@ -280,14 +280,14 @@ export default function TermTenancy() {
                     type="date"
                     value={termTenancy.coverDateFrom}
                     name="coverDateFrom"
-                    onChange={(e) => handleUpdateTermTenancy(e)}
+                    onInput={handleUpdateTermTenancy}
                     className="bg-transparent md:text-xl  inline border border-black text-gray-900 rounded-sm p-2 focus:shadow-md"
                   ></input>
                 </div>
                 <div className="md:flex md:justify-between">
                   <span className="block my-6">To</span>
                   <input
-                    onChange={(e) => handleUpdateTermTenancy(e)}
+                    onInput={handleUpdateTermTenancy}
                     type="date"
                     value={termTenancy.coverDateTo}
                     name="coverDateTo"

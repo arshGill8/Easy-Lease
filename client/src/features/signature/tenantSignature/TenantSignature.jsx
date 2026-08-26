@@ -1,5 +1,5 @@
 import { AiOutlinePlusCircle, AiOutlineCloseCircle } from "react-icons/ai";
-import React, { useRef, useEffect, useMemo } from "react";
+import React, { useRef } from "react";
 import SignatureCanvas from "react-signature-canvas";
 import FormHeader from "../../../common/FormHeader";
 import { useDispatch, useSelector } from "react-redux";
@@ -72,35 +72,35 @@ export default function TenantSignature() {
                 name="tenantSign"
                 onEnd={() => handleTenantEnd(index)}
               />
-              <label className="w-full">X Tenant Signature</label>
+              <label className="signature-label">X — Tenant signature</label>
             </div>
             <input
               name="tenantSignDate"
               type="date"
-              className="bg-transparent  md:text-xl w-4/5 mb-4  border border-black text-gray-900 rounded-sm p-2 focus:shadow-md "
-              onChange={(e) => handleUpdateTenantSignature(index, e)}
+              className="date-input"
+              onInput={(e) => handleUpdateTenantSignature(index, e)}
               value={singleTenantSignature.tenantSignDate}
             />
 
-            <div className="flex my-8  gap-20 mb-16">
+            <div className="signature-actions">
               {tenantSignature.length > 1 && (
                 <button
-                  className="w-full flex gap-1 items-center justify-center  font-medium	 text-white bg-red-500   p-2 py-3 rounded hover:bg-red-600 shadow-md"
+                  className="inline-action inline-action-danger"
                   type="button"
                   onClick={() => handleRemoveTenantSignature(index)}
                 >
-                  Remove <AiOutlineCloseCircle />
+                  <AiOutlineCloseCircle aria-hidden="true" /> Remove
                 </button>
               )}
 
               {tenantSignature.length - 1 == index &&
                 tenantSignature.length < 5 && (
                   <button
-                    className=" w-full ml-auto flex gap-1 items-center justify-center font-medium	 text-white bg-green-500  p-2 py-3 rounded hover:bg-green-600 shadow-md"
+                    className="inline-action inline-action-add ml-auto"
                     type="button"
                     onClick={handleAddTenantSignature}
                   >
-                    Tenant <AiOutlinePlusCircle />
+                    <AiOutlinePlusCircle aria-hidden="true" /> Add tenant
                   </button>
                 )}
             </div>

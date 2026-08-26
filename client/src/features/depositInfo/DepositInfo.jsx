@@ -129,7 +129,7 @@ export default function DepositInfo() {
           />
           <h2 className=" flex justify-center mt-4">Provide description</h2>
           <InputField
-            value={DepositInfo.keyDepositDesc}
+            value={depositInfo.keyDepositDesc}
             onChange={(e) => handleUpdateDepositInfo(e)}
             placeholder="ex. number of keys, access cards and remote
               entry devices"

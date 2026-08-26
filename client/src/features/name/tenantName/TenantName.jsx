@@ -59,21 +59,21 @@ export default function TenantName() {
           <div className="flex mt-2">
             {tenantName.length > 1 && (
               <button
-                className="w-1/2.5 py-1.5 px-2 md:w-1/5 flex gap-1 items-center justify-center text-sm text-white font-thin bg-red-500 rounded hover:bg-red-600 shadow-sm"
+                className="inline-action inline-action-danger"
                 type="button"
                 onClick={() => handleRemoveTenantName(i)}
               >
-                Remove <FaMinus />
+                <FaMinus aria-hidden="true" /> Remove
               </button>
             )}
 
             {tenantName.length - 1 == i && tenantName.length < 5 && (
               <button
-                className="w-1/2.5 py-1.5 px-2 md:w-1/5 ml-auto flex gap-1 items-center justify-center text-sm text-white bg-green-600  font-thin rounded-sm hover:bg-green-600 shadow-md"
+                className="inline-action inline-action-add ml-auto"
                 type="button"
                 onClick={handleAddTenantName}
               >
-                Add Tenant <FaPlus />
+                <FaPlus aria-hidden="true" /> Add tenant
               </button>
             )}
           </div>

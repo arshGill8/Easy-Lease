@@ -1,20 +1,10 @@
-// Reusable input component
-export default function InputField({
-  placeholder,
-  name,
-  type,
-  value,
-  onChange,
-  className = "bg-transparent font-header w-full text-base mb-4 mt-4 placeholder-gray-500 border-b-2 border-black py-2 focus:border-[#43A047] focus:outline-none",
-}) {
+export default function InputField({ placeholder, label, name, type = "text", value, onChange, className = "form-input", ...props }) {
+  const inputId = props.id || name;
+  const visibleLabel = label || placeholder;
   return (
-    <input
-      placeholder={placeholder}
-      name={name}
-      type="text"
-      onChange={onChange}
-      value={value}
-      className={className}
-    />
+    <div className="field-group">
+      {visibleLabel && <label htmlFor={inputId}>{visibleLabel}</label>}
+      <input {...props} id={inputId} placeholder={placeholder} name={name} type={type} onChange={onChange} value={value} className={className} />
+    </div>
   );
 }

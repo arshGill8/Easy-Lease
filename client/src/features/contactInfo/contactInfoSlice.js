@@ -19,7 +19,6 @@ export const contactInfoSlice = createSlice({
   initialState,
   reducers: {
     updateContactInfo: (state, action) => {
-      console.log(action.payload);
       const { name, value } = action.payload;
       state[name] = value;
     },

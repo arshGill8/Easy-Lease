@@ -11,7 +11,8 @@ export default function BackButton() {
 
   return (
     <button
-      className="font-bold pr-2 py-2.5 flex justify-center items-center  bg-[#1E88E5] border-black w-1/2 rounded hover:bg-slate-300 shadow-lg text-black"
+      type="button"
+      className="button button-secondary"
       onClick={handlePageDecrement}
     >
       <MdOutlineNavigateBefore className="text-2xl" />

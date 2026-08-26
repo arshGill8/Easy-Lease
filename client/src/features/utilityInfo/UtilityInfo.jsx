@@ -185,7 +185,7 @@ export default function UtilityInfo() {
         <h3 className=" text-md">Electricity</h3>
         <div className="flex gap-6 ">
           <div className="flex flex-col gap-2 items-center">
-            <label className="text-base">LandLord</label>
+            <label className="text-base">Landlord</label>
             <RadioButton
               name="electricity"
               value="landlord"
@@ -211,7 +211,7 @@ export default function UtilityInfo() {
         <h3 className=" text-md">Heat</h3>
         <div className="flex gap-6 ">
           <div className="flex flex-col gap-2 items-center">
-            <label className="text-base">LandLord </label>
+            <label className="text-base">Landlord</label>
 
             <RadioButton
               name="heat"
@@ -240,7 +240,7 @@ export default function UtilityInfo() {
         <h3 className=" text-md">Water</h3>
         <div className="flex gap-6 ">
           <div className="flex flex-col gap-2 items-center">
-            <label className="text-base">LandLord </label>
+            <label className="text-base">Landlord</label>
 
             <RadioButton
               name="water"
